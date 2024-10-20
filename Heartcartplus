@@ -1,0 +1,284 @@
+import streamlit as st
+
+st.markdown("""
+    <style>
+    .header {
+        font-size: 40px;
+        color: #2E8B57;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .tab {
+        margin: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f0f8ff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 16px;
+        color: #555;
+    }
+    .alternative {
+        font-weight: bold;
+        color: #2E8B57;
+    }
+    .content {
+        font-size: 18px;
+        color: #333;
+    }
+    </style>
+""",
+            unsafe_allow_html=True)
+
+st.title("Welcome to Heartcartplus!")
+
+tabs = st.tabs([
+    "Home", "Profile Creation", "Healthy Diets", "Healthy Workouts",
+    "Healthy Alternatives Chatbot"
+])
+
+with tabs[0]:
+    st.markdown('<div class="tab">', unsafe_allow_html=True)
+    st.markdown('<h2 class="header">Your Healthy Lifestyle Journey</h2>',
+                unsafe_allow_html=True)
+    st.write(
+        "Heartcartplus is your go-to app for embracing a healthier lifestyle! Whether you want to improve your diet, engage in effective workouts, or find healthy snack alternatives, we have you covered."
+    )
+    st.write("### Explore Our Features:")
+    st.write(
+        "- **Healthy Diet Plans**: Discover various diet plans tailored to different needs and preferences."
+    )
+    st.write(
+        "- **Workout Routines**: Access workouts that cater to all fitness levels, helping you stay active and fit."
+    )
+    st.write(
+        "- **Healthy Alternatives Chatbot**: Get personalized suggestions for healthier snack options."
+    )
+    st.write("Join us in transforming your lifestyle one step at a time!")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with tabs[1]:
+    st.markdown('<div class="tab">', unsafe_allow_html=True)
+    st.markdown('<h2 class="header">Create Your Personal Profile</h2>',
+                unsafe_allow_html=True)
+
+    st.write("### Personal Information:")
+    name = st.text_input("Enter your name:")
+    age = st.number_input("Enter your age:", min_value=1, max_value=120)
+    weight = st.number_input("Enter your weight (in pounds):", min_value=1)
+    height = st.number_input("Enter your height (in inches):", min_value=1)
+    goals = st.selectbox("Select your primary health goal:", [
+        "Weight Loss", "Muscle Gain", "Improve Endurance",
+        "Maintain Current Weight"
+    ])
+
+    if st.button("Save Profile"):
+        st.session_state.user_profile = {
+            "name": name,
+            "age": age,
+            "weight": weight,
+            "height": height,
+            "goals": goals
+        }
+        st.success("Profile saved successfully!")
+
+    if 'user_profile' in st.session_state:
+        st.write("### Your Profile:")
+        st.write(f"**Name**: {st.session_state.user_profile['name']}")
+        st.write(f"**Age**: {st.session_state.user_profile['age']}")
+        st.write(f"**Weight**: {st.session_state.user_profile['weight']} lbs")
+        st.write(f"**Height**: {st.session_state.user_profile['height']} in")
+        st.write(f"**Goals**: {st.session_state.user_profile['goals']}")
+
+        st.write("### Recommendations Based on Your Goals:")
+        if st.session_state.user_profile["goals"] == "Weight Loss":
+            st.write(
+                "Consider a balanced diet with a caloric deficit. Focus on high-fiber foods, lean proteins, and plenty of fruits and vegetables."
+            )
+            st.write("### Suggested Diet Plan:")
+            st.write("- **Breakfast**: Greek yogurt with berries.")
+            st.write("- **Lunch**: Quinoa salad with mixed vegetables.")
+            st.write("- **Snack**: Carrot sticks with hummus.")
+            st.write(
+                "- **Dinner**: Grilled chicken with steamed broccoli and brown rice."
+            )
+            st.write("### Best Diet for You: **Mediterranean Diet**")
+        elif st.session_state.user_profile["goals"] == "Muscle Gain":
+            st.write(
+                "Incorporate strength training and consume a protein-rich diet. Aim for a slight caloric surplus with healthy fats and carbohydrates."
+            )
+            st.write("### Suggested Diet Plan:")
+            st.write(
+                "- **Breakfast**: Scrambled eggs with spinach and whole-grain toast."
+            )
+            st.write(
+                "- **Lunch**: Turkey and avocado wrap with whole-grain tortilla."
+            )
+            st.write("- **Snack**: Protein shake with banana.")
+            st.write("- **Dinner**: Salmon with sweet potatoes and asparagus.")
+            st.write("### Best Diet for You: **Keto Diet**")
+        elif st.session_state.user_profile["goals"] == "Improve Endurance":
+            st.write(
+                "Include aerobic exercises and maintain a balanced diet rich in carbohydrates and lean proteins for sustained energy."
+            )
+            st.write("### Suggested Diet Plan:")
+            st.write("- **Breakfast**: Oatmeal with sliced banana and nuts.")
+            st.write(
+                "- **Lunch**: Brown rice with black beans and mixed veggies.")
+            st.write("- **Snack**: Trail mix with nuts and dried fruit.")
+            st.write("- **Dinner**: Pasta with tomato sauce and a side salad.")
+            st.write("### Best Diet for You: **DASH Diet**")
+        elif st.session_state.user_profile[
+                "goals"] == "Maintain Current Weight":
+            st.write(
+                "Focus on a balanced diet with appropriate portion sizes and regular exercise to keep your weight steady."
+            )
+            st.write("### Suggested Diet Plan:")
+            st.write(
+                "- **Breakfast**: Smoothie with spinach, banana, and almond milk."
+            )
+            st.write(
+                "- **Lunch**: Chicken Caesar salad with whole grain croutons.")
+            st.write("- **Snack**: Apple with almond butter.")
+            st.write(
+                "- **Dinner**: Stir-fried tofu with mixed vegetables and brown rice."
+            )
+            st.write("### Best Diet for You: **Plant-Based Diet**")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with tabs[2]:
+    st.markdown('<div class="tab">', unsafe_allow_html=True)
+    st.markdown('<h2 class="header">Healthy Diet Plans</h2>',
+                unsafe_allow_html=True)
+
+    st.write("### Different Diets to Consider:")
+    st.write(
+        "- **Mediterranean Diet**: Focuses on whole foods, healthy fats, and plenty of fruits and vegetables. It's known for its heart-healthy benefits."
+    )
+    st.write(
+        "- **DASH Diet**: Designed to help reduce blood pressure with a focus on fruits, vegetables, and low-fat dairy. It's rich in nutrients and fiber."
+    )
+    st.write(
+        "- **Plant-Based Diet**: Emphasizes whole plant foods and minimizes animal products, promoting health and environmental sustainability."
+    )
+    st.write(
+        "- **Keto Diet**: A low-carb, high-fat diet that encourages your body to burn fat for energy. It's popular for weight loss."
+    )
+    st.write(
+        "- **Intermittent Fasting**: Cycles between periods of eating and fasting to help with weight loss and metabolic health. It can enhance fat burning and improve brain function."
+    )
+
+    st.write("### Sample 1600 kcal Diet Plan:")
+    st.write("- **Breakfast**: 300 kcal")
+    st.write("  - Oatmeal with berries and a small banana")
+    st.write("- **Lunch**: 500 kcal")
+    st.write("  - Grilled chicken salad with whole grain roll")
+    st.write("- **Snack**: 200 kcal")
+    st.write("  - An apple with almond butter")
+    st.write("- **Dinner**: 600 kcal")
+    st.write("  - Baked salmon with quinoa and steamed broccoli")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with tabs[3]:
+    st.markdown('<div class="tab">', unsafe_allow_html=True)
+    st.markdown('<h2 class="header">Recommended Workouts</h2>',
+                unsafe_allow_html=True)
+
+    st.write("### Weekly Workout Routine:")
+    st.write("- **Monday**: 30 minutes of jogging + 15 minutes of stretching.")
+    st.write("- **Tuesday**: Strength training (upper body) + core workout.")
+    st.write("- **Wednesday**: 45 minutes of cycling.")
+    st.write(
+        "- **Thursday**: Strength training (lower body) + flexibility exercises."
+    )
+    st.write("- **Friday**: 30 minutes of swimming.")
+    st.write(
+        "- **Saturday**: Yoga or Pilates session for relaxation and flexibility."
+    )
+    st.write("- **Sunday**: Rest day or light walking to recover.")
+
+    st.write("### Tips for Staying Motivated:")
+    st.write("- Set achievable fitness goals and track your progress.")
+    st.write("- Find a workout buddy to keep you accountable.")
+    st.write("- Mix up your routine to prevent boredom and stay engaged.")
+    st.write("- Remember to listen to your body and rest as needed.")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with tabs[4]:
+    st.markdown('<div class="tab">', unsafe_allow_html=True)
+    st.markdown('<h2 class="header">Healthy Alternatives Chatbot</h2>',
+                unsafe_allow_html=True)
+
+    st.write("### Find Healthier Alternatives:")
+    user_input = st.text_input(
+        "What food would you like a healthier alternative for?")
+
+    alternatives = {
+        "ice cream": {
+            "alternative":
+            "Greek yogurt with honey and berries",
+            "recipe":
+            "Mix 1 cup of Greek yogurt with 1 tbsp of honey and top it with your favorite berries."
+        },
+        "potato chips": {
+            "alternative":
+            "Baked sweet potato chips",
+            "recipe":
+            "Slice sweet potatoes thinly, toss with olive oil and sea salt, then bake at 400°F for 20-25 minutes."
+        },
+        "pasta": {
+            "alternative":
+            "Zucchini noodles",
+            "recipe":
+            "Spiralize zucchini and sauté with olive oil, garlic, and your choice of sauce."
+        },
+        "burger": {
+            "alternative":
+            "Turkey or black bean burger",
+            "recipe":
+            "Mix ground turkey or black beans with spices, form patties, and grill or pan-fry."
+        },
+        "soda": {
+            "alternative":
+            "Sparkling water with lemon",
+            "recipe":
+            "Add lemon or lime juice to sparkling water for a refreshing drink."
+        },
+        "cookies": {
+            "alternative":
+            "Oatmeal cookies with dark chocolate",
+            "recipe":
+            "Mix oats, mashed banana, and dark chocolate chips, then bake at 350°F for 10-12 minutes."
+        },
+        "pizza": {
+            "alternative":
+            "Cauliflower crust pizza",
+            "recipe":
+            "Blend cauliflower, cheese, and egg, shape into a crust, bake, and top with your favorite toppings."
+        },
+    }
+
+    if user_input:
+        user_input_lower = user_input.lower()
+        if user_input_lower in alternatives:
+            alternative = alternatives[user_input_lower]
+            st.write(
+                f"**Healthy alternative for {user_input}:** {alternative['alternative']}"
+            )
+            st.write(f"**Recipe:** {alternative['recipe']}")
+        else:
+            st.write(
+                "Sorry, we don't have a healthier alternative for that food yet. Please try another one!"
+            )
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="footer">', unsafe_allow_html=True)
+st.write("© 2024 Heartcartplus. All rights reserved.")
+st.markdown('</div>', unsafe_allow_html=True)
